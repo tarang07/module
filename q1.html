@@ -1,44 +1,33 @@
-
 <!DOCTYPE html>
+<html>
 <head>
-    <title>Assignment AngularJs Route</title>
-  	<script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js></script>
-	<script src="https://code.angularjs.org/1.5.7/angular-route.js"></script>
-
-  	<script>
-	    var module = angular.module("sampleApp", ['ngRoute']);
-
-	    module.config(['$routeProvider',
-	        function($routeProvider) {
-	            $routeProvider.
-	                    when('/route1/:param', {
-	                        templateUrl: 'templates/f1.html',
-	                        controller: 'RouteController'
-	                    }).
-	                    when('/route2/:param', {
-	                        templateUrl: 'templates/s2.html',
-	                        controller: 'RouteController'
-	                    }).
-	                    otherwise({
-	                        redirectTo: '/',
-	                        controller : 'HomePageController'
-	                    });
-	        }]);
-
-	    module.controller("RouteController", function($scope, $routeParams) {
-	        $scope.param = $routeParams.param;
-	    })
-	    .controller("HomePageController",function($scope) {
-	    	$scope.message = "Home Page";
-	    })   
+	<title>
+		Custom Directive Assignments Q1
+	</title>
+	<script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		var mod=angular.module("ModuleDirective",[]);
+		mod.directive("ngCopy",function(){ // Custom directive for copy input
+			return {
+				template:"<p> Entered Text Is: <b>{{txt}}</b></p>",
+				restrict:'EA'
+			}
+		});
 	</script>
 </head>
-
-<body ng-app="sampleApp">
-
-	<a href="#/route1/param1">Route 1</a><br/>
-	<a href="#/route2/param2">Route 2</a><br/>
-	<div ng-view></div>
-
+<body ng-app="ModuleDirective">
+	<br>
+	<form>
+	<div>
+		<p>Enter Your Text : </p>
+		<div>
+			<input type="text" placeholder="Enter text here" ng-model="txt">
+		</div>
+	</div>
+	</form>
+	<br><br>
+	<div ng-Copy>
+	</div>
 </body>
 </html>
