@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<head>
+    <title>Assignment2 AngularJs Route</title>
+  	<script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js></script>
+	<script src="https://code.angularjs.org/1.5.7/angular-route.js"></script>
+
+  	<script>
+	    var module = angular.module("sampleApp", ['ngRoute']);
+
+	    module.config(['$routeProvider',
+	        function($routeProvider) {
+	            $routeProvider.
+	                    when('/route1/:param', { //route 1
+	                        templateUrl: 'templates/f1.html',
+	                        controller: 'RouteController'
+	                    }).
+	                    when('/route2/:param', { //route2
+	                        templateUrl: 'templates/s2.html',
+	                        controller: 'RouteController'
+	                    }).
+	                    when('/route3/:param', { //route3
+	                    	templateUrl: 'templates/t3.html',
+	                    	controller:'RouteController'
+	                    }).
+	                    when('/route4/:param', { //route4
+	                    	templateUrl: 'templates/f4.html',
+	                    	controller:'RouteController'
+	                    }).
+	                    otherwise({       //default
+	                        redirectTo: '/',
+	                        controller : 'HomePageController'
+	                    });
+	        }]);
+
+	    module.controller("RouteController", function($scope, $routeParams) {
+	        $scope.param = $routeParams.param;
+	    })
+	    .controller("HomePageController",function($scope) {
+	    	$scope.message = "Home Page";
+	    })   
+	</script>
+</head>
+
+<body ng-app="sampleApp">
+
+	<a href="#/route1/param1">Route 1</a><br/>
+	<a href="#/route2/param2">Route 2</a><br/>
+	<a href="#/route3/param3">Route 3</a><br/>
+	<a href="#/route4/param4">Route 4</a><br/>
+
+	<div ng-view></div>
+
+</body>
+</html>
